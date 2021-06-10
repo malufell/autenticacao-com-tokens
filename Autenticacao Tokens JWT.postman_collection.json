@@ -1,0 +1,593 @@
+{
+	"info": {
+		"_postman_id": "26ed93d5-d80b-4f23-b46c-1a99eb810e6c",
+		"name": "Autenticacao Tokens JWT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Criar usuário",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nome",
+							"value": "\"autenticacao jwt\"",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "\"autenticacao jwt\"",
+							"type": "text"
+						},
+						{
+							"key": "senha",
+							"value": "autenticacao",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/usuario"
+			},
+			"response": [
+				{
+					"name": "Erro - usuário já existe",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nome",
+									"value": "\"autenticacao jwt\"",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "\"autenticacao\" ",
+									"type": "text"
+								},
+								{
+									"key": "senha",
+									"value": "autenticacao",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/usuario"
+					},
+					"status": "Unprocessable Entity",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "33"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"21-Z+4BbGUeecYxshdxdZ1YyWjSTuM\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 10 Jun 2021 20:48:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"erro\": \"O usuário já existe!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Lista de usuários",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/usuario/"
+			},
+			"response": [
+				{
+					"name": "Lista de usuários",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:3000/usuario/"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "283"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"11b-MLgmsArG1sROEwjnLdYOfXxkv6Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 10 Jun 2021 20:49:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 3,\n        \"nome\": \"\\\"autenticacao\\\"\",\n        \"email\": \"\\\"autenticacao\\\"\",\n        \"senhaHash\": \"$2b$12$u8zhT7UX57seTNAuBaW9luoAqlg4TJkEBXLujT1hqeJ36B4DmlF4S\"\n    },\n    {\n        \"id\": 4,\n        \"nome\": \"\\\"autenticacao jwt\\\"\",\n        \"email\": \"\\\"autenticacao jwt\\\"\",\n        \"senhaHash\": \"$2b$12$x3STRQGvAGRSqJhI3CQ9merps/iI47OF8ThQnekPZ2jm8mjDLIchq\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Deletar usuário",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjIzMzU4MzIyLCJleHAiOjE2MjMzNTkyMjJ9.ox1UDhMz99pceN6lEqVCL8F-dj3Q2Co09GyqRFCfr8U"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:3000/usuario/5"
+			},
+			"response": [
+				{
+					"name": "Deletar usuário",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost:3000/usuario/5"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 10 Jun 2021 20:55:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Erro - Unauthorized",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost:3000/usuario/5"
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 10 Jun 2021 20:50:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Criar post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "titulo",
+							"value": "\"postagem 2\"",
+							"type": "text"
+						},
+						{
+							"key": "conteudo",
+							"value": "\"conteudo conteudo conteudo\"",
+							"type": "text"
+						}
+					]
+				},
+				"url": "localhost:3000/post"
+			},
+			"response": [
+				{
+					"name": "Criar post",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjIzMzQ1ODg2LCJleHAiOjE2MjMzNDY3ODZ9.nyY2uHTJsh7XLLuUr9DkubMOhtjxdG9wnBA7zOshI1s",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "titulo",
+									"value": "\"postagem nova\"",
+									"type": "text"
+								},
+								{
+									"key": "conteudo",
+									"value": "\"conteudo conteudo conteudo\"",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/post"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a-MitAXyTmJI2ZWpnzHz6r+kxS3pk\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 10 Jun 2021 20:57:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"titulo\": \"\\\"postagem nova\\\"\",\n    \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n}"
+				},
+				{
+					"name": "Erro - Token inválido por logout",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjIzMzQ1ODg2LCJleHAiOjE2MjMzNDY3ODZ9.nyY2uHTJsh7XLLuUr9DkubMOhtjxdG9wnBA7zOshI1s",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "titulo",
+									"value": "\"postagem nova\"",
+									"type": "text"
+								},
+								{
+									"key": "conteudo",
+									"value": "\"conteudo conteudo conteudo\"",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/post"
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "37"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"25-mGYcvq+xMn8Uur3V4Ty46Ts/KEY\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 10 Jun 2021 18:31:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"erro\": \"Token inválido por logout\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Lista de posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/post/"
+			},
+			"response": [
+				{
+					"name": "Lista de posts",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:3000/post/"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1735"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6c7-mSejf15YEjjg6H3JemvnuxvDUYo\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 10 Jun 2021 20:55:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"titulo\": \"\\\"postagem\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 2,\n        \"titulo\": \"\\\"postagem 2\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 3,\n        \"titulo\": \"\\\"postagem 222\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 4,\n        \"titulo\": \"\\\"postagem 222\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 5,\n        \"titulo\": \"\\\"postagem 33\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 6,\n        \"titulo\": \"\\\"postagem 33\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 7,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 8,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 9,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 10,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 11,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 12,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 13,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 14,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 15,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 16,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 17,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 18,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 19,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 20,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 21,\n        \"titulo\": \"\\\"postagem nova\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Efetuar login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "\"autenticacao\"",
+							"type": "text"
+						},
+						{
+							"key": "senha",
+							"value": "autenticacao",
+							"type": "text"
+						}
+					]
+				},
+				"url": "localhost:3000/usuario/login"
+			},
+			"response": [
+				{
+					"name": "Efetuar login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "\"malu\"",
+									"type": "text"
+								},
+								{
+									"key": "senha",
+									"value": "autenticacao",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost:3000/usuario/login"
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Authorization",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjIzMzU4MzIyLCJleHAiOjE2MjMzNTkyMjJ9.ox1UDhMz99pceN6lEqVCL8F-dj3Q2Co09GyqRFCfr8U"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 10 Jun 2021 20:52:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Efetuar logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjIzMzU4NTkwLCJleHAiOjE2MjMzNTk0OTB9.7H0bCpK8HqiMStqe012hJDjJ8POZRxvpzvZ_3AX7dv8"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/usuario/logout"
+			},
+			"response": [
+				{
+					"name": "Efetuar logout",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:3000/usuario/logout"
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 10 Jun 2021 20:57:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
