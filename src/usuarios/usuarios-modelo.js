@@ -9,16 +9,21 @@ class Usuario {
     this.nome = usuario.nome;
     this.email = usuario.email;
     this.senhaHash = usuario.senhaHash;
+    this.emailVerificado = usuario.emailVerificado;
 
     this.valida();
   }
 
   async adiciona() {
-    if (await Usuario.buscaPorEmail(this.email)) {
+    const usuarioExistente = await Usuario.buscaPorEmail(this.email);
+    if (usuarioExistente) {
       throw new InvalidArgumentError('O usuário já existe!');
     }
 
-    return usuariosDao.adiciona(this);
+    await usuariosDao.adiciona(this);
+    const usuarioCriado = await Usuario.buscaPorEmail(this.email);
+    const id = usuarioCriado.id;
+    return this.id = id;
   }
 
   async adicionaSenha(senha) {
@@ -32,6 +37,11 @@ class Usuario {
   valida() {
     validacoes.campoStringNaoNulo(this.nome, 'nome');
     validacoes.campoStringNaoNulo(this.email, 'email');
+  }
+
+  async modificaEmail() {
+    this.emailVerificado = true;
+    await usuariosDao.modificaEmailVerificado(this, this.emailVerificado) //o this sozinho envia o usuario completo
   }
 
   async deleta() {
@@ -52,7 +62,6 @@ class Usuario {
     if (!usuario) {
       return null;
     }
-
     return new Usuario(usuario);
   }
 
