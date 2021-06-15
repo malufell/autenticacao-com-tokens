@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "26ed93d5-d80b-4f23-b46c-1a99eb810e6c",
 		"name": "Autenticacao Tokens JWT",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -11,64 +11,107 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "nome",
-							"value": "\"autenticacao jwt\"",
-							"type": "text"
-						},
-						{
-							"key": "email",
-							"value": "\"autenticacao jwt\"",
-							"type": "text"
-						},
-						{
-							"key": "senha",
-							"value": "autenticacao",
-							"type": "text"
-						}
-					],
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"autenticacao\",\r\n    \"email\": \"teste\",\r\n    \"senha\": \"teste123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "localhost:3000/usuario"
+				"url": {
+					"raw": "localhost:3000/usuario",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario"
+					]
+				}
 			},
 			"response": [
 				{
-					"name": "Erro - usuário já existe",
+					"name": "Criar usuário",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "nome",
-									"value": "\"autenticacao jwt\"",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "\"autenticacao\" ",
-									"type": "text"
-								},
-								{
-									"key": "senha",
-									"value": "autenticacao",
-									"type": "text"
-								}
-							],
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"autenticacao\",\r\n    \"email\": \"teste\",\r\n    \"senha\": \"teste123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "localhost:3000/usuario"
+						"url": {
+							"raw": "localhost:3000/usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Jun 2021 12:49:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Erro - usuário já existe",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"autenticacao\",\r\n    \"email\": \"teste\",\r\n    \"senha\": \"teste123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario"
+							]
+						}
 					},
 					"status": "Unprocessable Entity",
 					"code": 422,
@@ -92,7 +135,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 10 Jun 2021 20:48:35 GMT"
+							"value": "Fri, 11 Jun 2021 12:51:44 GMT"
 						},
 						{
 							"key": "Connection",
@@ -113,7 +156,17 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3000/usuario/"
+				"url": {
+					"raw": "localhost:3000/usuario/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						""
+					]
+				}
 			},
 			"response": [
 				{
@@ -121,7 +174,17 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3000/usuario/"
+						"url": {
+							"raw": "localhost:3000/usuario/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								""
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -166,13 +229,27 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjIzMzU4MzIyLCJleHAiOjE2MjMzNTkyMjJ9.ox1UDhMz99pceN6lEqVCL8F-dj3Q2Co09GyqRFCfr8U"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjIzMzU4MzIyLCJleHAiOjE2MjMzNTkyMjJ9.ox1UDhMz99pceN6lEqVCL8F-dj3Q2Co09GyqRFCfr8U",
+							"type": "string"
+						}
+					]
 				},
 				"method": "DELETE",
 				"header": [],
-				"url": "localhost:3000/usuario/5"
+				"url": {
+					"raw": "localhost:3000/usuario/5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"5"
+					]
+				}
 			},
 			"response": [
 				{
@@ -180,7 +257,17 @@
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
-						"url": "localhost:3000/usuario/5"
+						"url": {
+							"raw": "localhost:3000/usuario/5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"5"
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -215,7 +302,17 @@
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
-						"url": "localhost:3000/usuario/5"
+						"url": {
+							"raw": "localhost:3000/usuario/5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"5"
+							]
+						}
 					},
 					"status": "Unauthorized",
 					"code": 401,
@@ -271,7 +368,16 @@
 						}
 					]
 				},
-				"url": "localhost:3000/post"
+				"url": {
+					"raw": "localhost:3000/post",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post"
+					]
+				}
 			},
 			"response": [
 				{
@@ -305,7 +411,16 @@
 								}
 							}
 						},
-						"url": "localhost:3000/post"
+						"url": {
+							"raw": "localhost:3000/post",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"post"
+							]
+						}
 					},
 					"status": "Created",
 					"code": 201,
@@ -374,7 +489,16 @@
 								}
 							}
 						},
-						"url": "localhost:3000/post"
+						"url": {
+							"raw": "localhost:3000/post",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"post"
+							]
+						}
 					},
 					"status": "Unauthorized",
 					"code": 401,
@@ -419,7 +543,17 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3000/post/"
+				"url": {
+					"raw": "localhost:3000/post/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"post",
+						""
+					]
+				}
 			},
 			"response": [
 				{
@@ -427,7 +561,17 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3000/post/"
+						"url": {
+							"raw": "localhost:3000/post/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"post",
+								""
+							]
+						}
 					},
 					"status": "OK",
 					"code": 200,
@@ -473,21 +617,25 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "email",
-							"value": "\"autenticacao\"",
-							"type": "text"
-						},
-						{
-							"key": "senha",
-							"value": "autenticacao",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"teste\",\r\n    \"senha\": \"teste123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
-				"url": "localhost:3000/usuario/login"
+				"url": {
+					"raw": "localhost:3000/usuario/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"login"
+					]
+				}
 			},
 			"response": [
 				{
@@ -510,7 +658,17 @@
 								}
 							]
 						},
-						"url": "localhost:3000/usuario/login"
+						"url": {
+							"raw": "localhost:3000/usuario/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"login"
+							]
+						}
 					},
 					"status": "No Content",
 					"code": 204,
@@ -547,13 +705,36 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjIzMzU4NTkwLCJleHAiOjE2MjMzNTk0OTB9.7H0bCpK8HqiMStqe012hJDjJ8POZRxvpzvZ_3AX7dv8"
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjIzNjc3OTQ2LCJleHAiOjE2MjM2Nzg4NDZ9.HY3CQfwu-RynKIYTfZoVORrZiByjALtNwKLw56IzGeQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refreshToken\": \"52d92523970e447f9a019fef79c1e16db6745a38829c7263\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
 					}
 				},
-				"method": "GET",
-				"header": [],
-				"url": "localhost:3000/usuario/logout"
+				"url": {
+					"raw": "localhost:3000/usuario/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"logout"
+					]
+				}
 			},
 			"response": [
 				{
@@ -561,7 +742,17 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:3000/usuario/logout"
+						"url": {
+							"raw": "localhost:3000/usuario/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"logout"
+							]
+						}
 					},
 					"status": "No Content",
 					"code": 204,
@@ -582,6 +773,354 @@
 						{
 							"key": "Keep-Alive",
 							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Erro - token inválido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"2c9bce92dee057a9cee65a01c7aa2b29516950e5b861620c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"logout"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1b-9BYLqafVfFPybCM4ujfwdKm3qis\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 14 Jun 2021 14:03:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"erro\": \"Token inválido!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Atualiza token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refreshToken\": \"1ad807779ca46c56fbece387fde5658c6df4da84dfacaa09\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/usuario/atualiza_token",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"atualiza_token"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Atualiza token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"1ad807779ca46c56fbece387fde5658c6df4da84dfacaa09\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/atualiza_token",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"atualiza_token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Authorization",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjIzNDM3MTg3LCJleHAiOjE2MjM0MzgwODd9.7_BQM8OJLzO8yy6_Xv82YgVXpOdSckcap4d2njDPHcs"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "67"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"43-AXztK7C1LM4NqBopU0OnyX/utaE\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Jun 2021 18:46:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"refreshToken\": \"1ce632c31a8fa5e44d4203395858bfb5753a711bbd1067d9\"\n}"
+				},
+				{
+					"name": "Erro - Refresh token não enviado",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/atualiza_token",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"atualiza_token"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "38"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"26-RgN5trBFjHGx+s81vKFtw8tGok4\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Jun 2021 18:45:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"erro\": \"Refresh token não enviado!\"\n}"
+				},
+				{
+					"name": "Erro - Refresh token inválido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"920c5d84f74a15f80812c8ac2aff22895b45251f0ecbde22\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/atualiza_token",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"atualiza_token"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"23-AQiOI1wLSOGpPg/zAF7q+PZeQMQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Jun 2021 18:45:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"erro\": \"Refresh token inválido!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Confirmação de cadastro",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/usuario/verifica_email/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsImlhdCI6MTYyMzc0OTYyOCwiZXhwIjoxNjIzNzUzMjI4fQ.Zw2S4eDkI7GiaOcFfutjG_wkwzu8rE8OlsgddQxSwLk",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"verifica_email",
+						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsImlhdCI6MTYyMzc0OTYyOCwiZXhwIjoxNjIzNzUzMjI4fQ.Zw2S4eDkI7GiaOcFfutjG_wkwzu8rE8OlsgddQxSwLk"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Confirmação de cadastro",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/usuario/verifica_email/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsImlhdCI6MTYyMzc0OTYyOCwiZXhwIjoxNjIzNzUzMjI4fQ.Zw2S4eDkI7GiaOcFfutjG_wkwzu8rE8OlsgddQxSwLk",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"verifica_email",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsImlhdCI6MTYyMzc0OTYyOCwiZXhwIjoxNjIzNzUzMjI4fQ.Zw2S4eDkI7GiaOcFfutjG_wkwzu8rE8OlsgddQxSwLk"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 15 Jun 2021 09:34:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
 						}
 					],
 					"cookie": [],
