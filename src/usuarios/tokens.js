@@ -2,12 +2,27 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const allowlist = require("../../redis/allowlist-refresh-token");
 const blocklist = require("../../redis/blocklist-access-token");
+const redefinicaoSenha = require("../../redis/redefinicao-senha-tokens");
 const { InvalidArgumentError } = require("../erros");
 
 function criaAccesToken(id, [tempoQuantidade, tempoUnidade]) {
   const payload = { id };
   const token = jwt.sign(payload, process.env.CHAVE_JWT, { expiresIn: tempoQuantidade + tempoUnidade });
   return token;
+};
+
+async function verificaAccessToken(token) {
+  const tokenNaBlocklist = await blocklist.contemToken(token);
+  if (tokenNaBlocklist) {
+    throw new jwt.JsonWebTokenError('Token inválido por logout');
+  }
+
+  const { id } = jwt.verify(token, process.env.CHAVE_JWT);
+  return id;
+};
+
+async function invalidaAccessToken(token) {
+  await blocklist.adiciona(token);
 };
 
 async function criaRefreshToken(id, tempoExpiracaoEmMilissegundos) {
@@ -30,22 +45,28 @@ async function verificaRefreshToken(token) {
   return id;
 };
 
-async function verificaAccessToken(token) {
-  const tokenNaBlocklist = await blocklist.contemToken(token);
-  if (tokenNaBlocklist) {
-    throw new jwt.JsonWebTokenError('Token inválido por logout');
-  }
-
-  const { id } = jwt.verify(token, process.env.CHAVE_JWT);
-  return id;
-};
-
-async function invalidaAccessToken(token) {
-  await blocklist.adiciona(token);
-};
-
 async function invalidaRefreshToken(token) {
   await allowlist.deleta(token);
+};
+
+async function criaTokenNovaSenha(id, tempoExpiracaoEmMilissegundos) {
+  const dataExpiracao = Date.now() + tempoExpiracaoEmMilissegundos;
+  const tokenOpaco = crypto.randomBytes(24).toString('hex');
+  await redefinicaoSenha.adiciona(tokenOpaco, id, dataExpiracao)
+  return tokenOpaco;
+};
+
+async function verificaTokenNovaSenha(token) {
+  const id = await redefinicaoSenha.buscaValor(token);
+
+  if (!token) { //pode vir undefined do front/client
+    throw new InvalidArgumentError("Token não enviado!");
+  }
+  if (!id) {
+    throw new InvalidArgumentError("Token inválido!");
+  }
+
+  return id;
 };
 
 //o uso do this é permitido nessa sintaxe
@@ -82,5 +103,14 @@ module.exports = {
     verifica(token) {
       return verificaAccessToken(token)
     },
+  },
+  redefinicaoDeSenha: {
+    expiracao: 3600000, //uma hora em milissegundos
+    cria (id) {
+      return criaTokenNovaSenha(id, this.expiracao)
+    },
+    verifica (token) {
+      return verificaTokenNovaSenha(token)
+    },
   }
-};
+}

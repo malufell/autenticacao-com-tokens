@@ -12,7 +12,20 @@ class InternalServerError extends Error {
   }
 }
 
-module.exports = {
-  InvalidArgumentError: InvalidArgumentError,
-  InternalServerError: InternalServerError
-};
+class NotFound extends Error {
+    constructor(entidade) {
+    const mensagem = `Não foi possível encontrar ${entidade}`
+    super(mensagem);
+    this.name = 'NotFound';
+  }
+}
+
+class Unauthorized extends Error {
+    constructor() {
+    const mensagem = `Não foi possível acessar esse recurso`
+    super(mensagem);
+    this.name = 'Unauthorized';
+  }
+}
+
+module.exports = { InvalidArgumentError, InternalServerError, NotFound, Unauthorized };

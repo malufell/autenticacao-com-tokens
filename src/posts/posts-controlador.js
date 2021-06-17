@@ -1,30 +1,34 @@
 const Post = require('./posts-modelo');
-const { InvalidArgumentError, InternalServerError } = require('../erros');
+const { ControleDeAtributosPost } = require('../controle-de-atributos')
 
 module.exports = {
-  adiciona: async (req, res) => {
+  adiciona: async (req, res, next) => {
     try {
       const post = new Post(req.body);
       await post.adiciona();
       
       res.status(201).send(post);
     } catch (erro) {
-      if (erro instanceof InvalidArgumentError) {
-        res.status(422).json({ erro: erro.message });
-      } else if (erro instanceof InternalServerError) {
-        res.status(500).json({ erro: erro.message });
-      } else {
-        res.status(500).json({ erro: erro.message });
-      }
+      next(erro)
     }
   },
 
-  lista: async (req, res) => {
+  //usuário não autenticado visualiza somente os títulos do post e 10 caracteres do conteúdo, seguidos da msg que precisa assinar
+  lista: async (req, res, next) => {
     try {
-      const posts = await Post.lista();
-      res.send(posts);
+      let posts = await Post.lista()
+      const atributosParaExibir = new ControleDeAtributosPost()
+
+      if (!req.estaAutenticado) {
+        posts = posts.map(post => {
+          post.conteudo = post.conteudo.substr(0, 10) + '... Você precisa assinar o blog para ler o restante do post'
+          return post
+        })
+      }
+
+      res.send(atributosParaExibir.filtrar(posts))
     } catch (erro) {
-      return res.status(500).json({ erro: erro });
+      next(erro)
     }
   }
 };

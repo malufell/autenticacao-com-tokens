@@ -1,7 +1,9 @@
 const Usuario = require('./usuarios-modelo');
-const { InvalidArgumentError, InternalServerError } = require('../erros');
 const tokens = require('./tokens');
-const { EmailVerificacao } = require('./emails');
+const { EmailVerificacao, EmailRedefinicaoSenha } = require('./emails');
+const { NotFound, InvalidArgumentError } = require('../erros');
+const { ControleDeAtributosUsuario } = require('../controle-de-atributos')
+
 
 function geraEndereco(rota, token) {
   const baseURL = process.env.BASE_URL;
@@ -9,10 +11,10 @@ function geraEndereco(rota, token) {
 }
 
 module.exports = {
-  adiciona: async (req, res) => {
-    const { nome, email, senha } = req.body;
+  adiciona: async (req, res, next) => {
+    const { nome, email, senha, cargo } = req.body;
     try {
-      const usuario = new Usuario({ nome, email, emailVerificado: false });
+      const usuario = new Usuario({ nome, email, emailVerificado: false, cargo });
       await usuario.adicionaSenha(senha);
       await usuario.adiciona();
 
@@ -22,39 +24,35 @@ module.exports = {
       emailVerificacao.enviaEmail().catch(console.log);
 
       res.status(201).json();
-    } catch (erro) {
-      if (erro instanceof InvalidArgumentError) {
-        res.status(422).json({ erro: erro.message });
-      } else if (erro instanceof InternalServerError) {
-        res.status(500).json({ erro: erro.message });
-      } else {
-        res.status(500).json({ erro: erro.message });
-      }
+    } catch(erro) {
+        next(erro);  
     }
   },
 
   lista: async (req, res) => {
     const usuarios = await Usuario.lista();
-    res.json(usuarios);
+
+    const atributosParaExibir = new ControleDeAtributosUsuario()
+    res.json(atributosParaExibir.converter(usuarios, req.acesso.todos.permitido ? req.acesso.todos.atributos : req.acesso.apenasSeu.atributos))
   },
 
-  verificaEmail: async (req, res) => {
+  verificaEmail: async (req, res, next) => {
     try {
       const usuario = new Usuario(req.user);
       await usuario.modificaEmail();
       res.status(200).send();
     } catch (erro) {
-      res.status(500).json({ erro: erro.message });
+        next(erro);
     }
   },
 
-  deleta: async (req, res) => {
-    const usuario = await Usuario.buscaPorId(req.params.id);
+  deleta: async (req, res, next) => {
     try {
+      const usuario = await Usuario.buscaPorId(req.params.id);
       await usuario.deleta();
       res.status(200).send();
-    } catch (erro) {
-      res.status(500).json({ erro: erro });
+    } catch(erro) {
+        next(erro);  
     }
   },
 
@@ -65,13 +63,48 @@ module.exports = {
     res.status(200).json({ refreshToken });
   },
 
-  logout: async (req, res) => {
+  logout: async (req, res, next) => {
     try {
       const token = req.token;
       await tokens.access.invalida(token);
       res.status(204).send();
     } catch(erro) { 
-      res.status(500).json({ erro: erro.message})
+        next(erro);
+    }
+  },
+
+  esqueciMinhaSenha: async (req, res, next) => {
+    const respostaPadrao = { mensagem: 'Se encontrarmos um usuário com este email, vamos enviar uma mensagem com as instruções para redefinir a senha' };
+
+    try {
+      const usuario = await Usuario.buscaPorEmail(req.body.email);
+      const token = await tokens.redefinicaoDeSenha.cria(usuario.id);
+      const email = new EmailRedefinicaoSenha(usuario, token);
+      await email.enviaEmail();
+      res.send(respostaPadrao);
+
+    } catch (erro) {
+      if (erro instanceof NotFound) {
+        res.send(respostaPadrao)
+        return
+      }
+      next(erro);
+    }
+  },
+
+  trocaSenha: async (req, res, next) => { 
+    try {
+      if (typeof req.body.token !== 'string' || req.body.token.lenght === 0) {
+        throw new InvalidArgumentError('O token está inválido')
+      };
+      const id = await tokens.redefinicaoDeSenha.verifica(req.body.token);
+      const usuario = await Usuario.buscaPorId(id);
+      await usuario.adicionaSenha(req.body.senha);
+      await usuario.atualizaSenha();
+      res.send({ mensagem: 'Sua senha foi atualizada com sucesso' });
+
+    } catch (erro) {
+      next(erro)
     }
   },
 };

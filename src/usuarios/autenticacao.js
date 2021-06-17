@@ -1,5 +1,5 @@
 const Usuario = require("./usuarios-modelo");
-const { InvalidArgumentError } = require("../erros");
+const { Unauthorized } = require("../erros");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -8,14 +8,14 @@ const tokens = require("./tokens");
 
 function verificaUsuario(usuario) {
   if (!usuario) {
-    throw new InvalidArgumentError("E-mail não cadastrado!");
+   throw new Unauthorized();
   }
 }
 
 async function verificaSenha(senha, senhaHash) {
   const senhaValida = await bcrypt.compare(senha, senhaHash); //bcrypt.compare retorna uma promise
   if (!senhaValida) {
-    throw new InvalidArgumentError("Senha inválida");
+    throw new Unauthorized();
   }
 }
 

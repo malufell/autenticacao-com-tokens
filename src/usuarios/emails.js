@@ -39,13 +39,25 @@ class Email {
 class EmailVerificacao extends Email {
   constructor(usuario, endereco){
     super();
-      this.from = process.env.EMAIL_USUARIO,
-      this.to = usuario,
-      this.subject = 'Confirmação de Cadastro',
-      this.text = 'Olá! Clique aqui para validar seu endereço!',
+      this.from = process.env.EMAIL_USUARIO
+      this.to = usuario
+      this.subject = 'Confirmação de Cadastro'
+      this.text = 'Olá! Clique aqui para validar seu endereço!'
       this.html = `<h1>Olá!</h1> <p>Clique <a href="${endereco}">aqui</a> para validar seu endereço!</p>`
       console.log(endereco)
   }
 }
 
-module.exports = { EmailVerificacao };
+class EmailRedefinicaoSenha extends Email {
+  constructor (usuario, token) {
+    super()
+    this.from = process.env.EMAIL_USUARIO
+    this.to = usuario.email
+    this.subject = 'Redefinição de Senha'
+    this.text = `Olá! Recebemos a sua solicitação para trocar a senha :) Use o token a seguir para trocar a sua senha: ${token}`
+    this.html = `<h1>Olá!</h1> Recebemos a sua solicitação para trocar a senha :) Use o token a seguir para trocar a sua senha: ${token}`
+    console.log(token)
+  }
+}
+
+module.exports = { EmailVerificacao, EmailRedefinicaoSenha  };
