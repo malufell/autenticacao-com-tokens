@@ -1,8 +1,10 @@
-## Autenticação com tokens (access token e refresh token)
+## Autenticação com tokens, Controle de acessos e atributos por Cargos
 
 ### Sobre o projeto:
 
-API em node.js, com express, sqlite3, redis, bcrypt, jsonwebtoken, passport-http-bearer, passport-local, nodemailer.
+API em node.js, com express, sqlite3, redis, bcrypt, jsonwebtoken, passport-http-bearer, passport-local, nodemailer, accesscontrol. Implementa cadastro de usuários e posts.
+
+:arrow_right: **Sobre autenticação com tokens (access token e refresh token):**
 
 - Implementa cadastro de usuários com proteção das senhas no banco de dados usando o bcrypt
 - Implementa autenticação local com passport, sem sessões, para login com usuário e senha
@@ -11,11 +13,10 @@ API em node.js, com express, sqlite3, redis, bcrypt, jsonwebtoken, passport-http
 - Implementa logout de usuários, invalidando os tokens através da blocklist salva no Redis
 - Implementa atualização do access token através de um refresh token (para que o usuário não precise fazer login a cada 15min)
 - Implementa validação do refresh token através de uma allowlist salva no Redis 
-- Implementa Nodemailer para confirmação de cadastro de usuários por email, onde a URL para validação também é composta por um token jwt exclusivo
-- Rotas protegidas com autenticação por tokens: `.post('/post')`, `.delete('/usuario/:id')`
+- Implementa nodemailer para confirmação de cadastro de usuários por email, onde a URL para validação também é composta por um token jwt exclusivo
+- Implementa recursos para atualização de senha (esqueci minha senha), com envio de token por email
+- Rotas protegidas com autenticação por tokens: `.post('/post')`, `.delete('/usuario/:id')`, `.get('/usuario')`
 - Arquivo completo de rotas disponível no .json do Postman salvo na raiz do projeto
-
-<br>
 
 Fluxo básico da autenticação no projeto:
 
@@ -26,6 +27,17 @@ Fluxo básico da autenticação no projeto:
   - com o access token expirado, mas o refresh token ainda válido, o usuário atualizará os dois tokens através da rota `'/usuario/atualiza_token'`. Com os dois tokens novos, o acesso continua sendo realizado normalmente
   - se os dois tokens estiverem expirados, será necessário realizar login novamente
 
+
+:arrow_right: **Sobre controle de acessos e atributos por Cargos:**
+
+- cargo "assinante" pode ler posts e ler apenas o nome dos usuários na lista
+- cargo "editor" pode criar e deletar posts de autoria própria e ler apenas o nome dos usuários na lista
+- cargo "admin" tem acesso a todos os recursos da aplicação: pode ler, criar e remover posts, pode deletar usuários, além de ler todos os dados dos usuários (nome, id, email, etc)
+- leitores não autenticados podem ler apenas os primeiros 10 caracteres do conteúdo de um post, seguidos da mensagem de que precisam se cadastrar para ler o restante
+
+
+<br>
+
 ### Como executar:
 
 Pré-requisitos: instalação do node.js e do redis.
@@ -33,7 +45,7 @@ Pré-requisitos: instalação do node.js e do redis.
 1. No terminal, clonar o projeto: `git clone https://github.com/malufell/autenticacao-com-tokens.git`
 2. Entrar na pasta do projeto: `cd autenticacao-com-tokens`
 3. Instalar as dependências: `npm install`
-4. Criar arquivo '.env' na raiz do projeto, com as variáveis de exemplo disponíveis no arquivo '.env-example'
+4. Criar arquivo '.env' na raiz do projeto, com as variáveis de exemplo disponíveis no arquivo '.env-example' (ver obs abaixo)
 5. Com o redis rodando, iniciar a aplicação: `npm start`
 6. O sqlite irá criar as tabelas de "usuários" e "posts", então já é possível criar um usuário acessando "localhost:3000/usuario" com o método http post
 7. Na raiz do projeto há o arquivo "Autenticacao Tokens JWT.postman_collection.json" com todas as rotas e exemplos, basta importar no Postman 
@@ -44,7 +56,7 @@ bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ7.eyJpZCI6MiwiaWF0IjoxNjIzMzYyMDQ1LCJl
 
 <br>
 
-Obs.: uma senha segura para a assinatura do token pode ser gerada com o 'crypto' do node.js: 
+Obs.: uma das variáveis do arquivo '.env' é a CHAVE_JWT, que se refere a senha segura para a assinatura do token. Essa info pode ser gerada com o 'crypto' do node.js: 
 ```javascript
 console.log(require('crypto').randomBytes(256).toString('base64'))`
 ```
