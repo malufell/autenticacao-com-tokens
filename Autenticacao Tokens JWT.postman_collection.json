@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"autenticacao\",\r\n    \"email\": \"teste\",\r\n    \"senha\": \"teste123\"\r\n}",
+					"raw": "{\r\n    \"nome\": \"trocasenha\",\r\n    \"email\": \"senha@teste.com\",\r\n    \"senha\": \"teste123\",\r\n    \"cargo\": \"assinante\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -38,7 +38,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"autenticacao\",\r\n    \"email\": \"teste\",\r\n    \"senha\": \"teste123\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"autenticacao\",\r\n    \"email\": \"teste@teste.com\",\r\n    \"senha\": \"teste123\",\r\n    \"cargo\": \"assinante\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -70,7 +70,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Fri, 11 Jun 2021 12:49:47 GMT"
+							"value": "Tue, 15 Jun 2021 12:24:58 GMT"
 						},
 						{
 							"key": "Connection",
@@ -200,15 +200,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "283"
+							"value": "331"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"11b-MLgmsArG1sROEwjnLdYOfXxkv6Y\""
+							"value": "W/\"14b-aMYC8NvWwDixfVfmUdYc7Qywc34\""
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 10 Jun 2021 20:49:51 GMT"
+							"value": "Tue, 15 Jun 2021 12:25:40 GMT"
 						},
 						{
 							"key": "Connection",
@@ -220,7 +220,60 @@
 						}
 					],
 					"cookie": [],
-					"body": "[\n    {\n        \"id\": 3,\n        \"nome\": \"\\\"autenticacao\\\"\",\n        \"email\": \"\\\"autenticacao\\\"\",\n        \"senhaHash\": \"$2b$12$u8zhT7UX57seTNAuBaW9luoAqlg4TJkEBXLujT1hqeJ36B4DmlF4S\"\n    },\n    {\n        \"id\": 4,\n        \"nome\": \"\\\"autenticacao jwt\\\"\",\n        \"email\": \"\\\"autenticacao jwt\\\"\",\n        \"senhaHash\": \"$2b$12$x3STRQGvAGRSqJhI3CQ9merps/iI47OF8ThQnekPZ2jm8mjDLIchq\"\n    }\n]"
+					"body": "[\n    {\n        \"id\": 1,\n        \"nome\": \"autenticacao\",\n        \"email\": \"teste\",\n        \"senhaHash\": \"$2b$12$28pbjzMNGmucbZiAM6oDDuIzJcvcgVd6skQGTSbe7QtzOSKciveB.\",\n        \"emailVerificado\": 0,\n        \"cargo\": \"admin\"\n    },\n    {\n        \"id\": 2,\n        \"nome\": \"autenticacao\",\n        \"email\": \"teste@teste.com\",\n        \"senhaHash\": \"$2b$12$ubMzfaThyk/x5Qq6vuZcney79K1hTGfR4TeP8Ry1RIHOqrDqSu4Bu\",\n        \"emailVerificado\": 0,\n        \"cargo\": \"assinante\"\n    }\n]"
+				},
+				{
+					"name": "Lista de usuários - para assinante",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/usuario/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"49-926nJdi1F/P4mXcZo8nYqE7Igp0\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 16 Jun 2021 21:42:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"nome\": \"autenticacao\"\n    },\n    {\n        \"nome\": \"autenticacao\"\n    },\n    {\n        \"nome\": \"autenticacao\"\n    }\n]"
 				}
 			]
 		},
@@ -232,22 +285,31 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjIzMzU4MzIyLCJleHAiOjE2MjMzNTkyMjJ9.ox1UDhMz99pceN6lEqVCL8F-dj3Q2Co09GyqRFCfr8U",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjIzODU0MTM0LCJleHAiOjE2MjM4NTUwMzR9.PqONmLLzE3akJExV5fqJF86EKxudrwvgTBd28551N_Q",
 							"type": "string"
 						}
 					]
 				},
 				"method": "DELETE",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"teste\",\r\n    \"senha\": \"teste123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:3000/usuario/5",
+					"raw": "localhost:3000/usuario/3",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"usuario",
-						"5"
+						"3"
 					]
 				}
 			},
@@ -298,7 +360,61 @@
 					"body": null
 				},
 				{
-					"name": "Erro - Unauthorized",
+					"name": "Deletar usuário como ADMIN",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"teste\",\r\n    \"senha\": \"teste123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 16 Jun 2021 14:37:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Erro - Unauthorized (sem token)",
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],
@@ -345,28 +461,94 @@
 					],
 					"cookie": [],
 					"body": null
+				},
+				{
+					"name": "Erro - assinante não pode deletar usuário",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"teste@teste.com\",\r\n    \"senha\": \"teste123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"3"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "54"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"36-IdsbxkvZGADvC9B3Z3rvWC7vQHI\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 16 Jun 2021 14:40:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "o cargo assinante não tem permissão para essa ação"
 				}
 			]
 		},
 		{
 			"name": "Criar post",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjIzODQ0MTg5LCJleHAiOjE2MjM4NDUwODl9.vRFZ8ZYDnSeIVDjau4_q7X4MZ5IaDeLk9B-dmg33qBY",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "titulo",
-							"value": "\"postagem 2\"",
-							"type": "text"
-						},
-						{
-							"key": "conteudo",
-							"value": "\"conteudo conteudo conteudo\"",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"titulo da postagem\",\r\n    \"conteudo\": \"implementando autorização de rotas - admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
 					"raw": "localhost:3000/post",
@@ -459,6 +641,67 @@
 					"body": "{\n    \"titulo\": \"\\\"postagem nova\\\"\",\n    \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n}"
 				},
 				{
+					"name": "Erro - acesso negado ao cargo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"titulo da postagem\",\r\n    \"conteudo\": \"implementando autorização de rotas - assinante\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/post",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"post"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "54"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"36-IdsbxkvZGADvC9B3Z3rvWC7vQHI\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 16 Jun 2021 11:48:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "o cargo assinante não tem permissão para essa ação"
+				},
+				{
 					"name": "Erro - Token inválido por logout",
 					"originalRequest": {
 						"method": "POST",
@@ -541,6 +784,16 @@
 		{
 			"name": "Lista de posts",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNjIzOTM4ODg2LCJleHAiOjE2MjM5Mzk3ODZ9.nqW5LjxJkPLWjXVdhtDB4ugM9uTrOHg-a2-ncUr19Sg",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -608,6 +861,59 @@
 					],
 					"cookie": [],
 					"body": "[\n    {\n        \"id\": 1,\n        \"titulo\": \"\\\"postagem\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 2,\n        \"titulo\": \"\\\"postagem 2\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 3,\n        \"titulo\": \"\\\"postagem 222\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 4,\n        \"titulo\": \"\\\"postagem 222\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 5,\n        \"titulo\": \"\\\"postagem 33\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 6,\n        \"titulo\": \"\\\"postagem 33\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 7,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 8,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 9,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 10,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 11,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 12,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 13,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 14,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 15,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 16,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 17,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 18,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 19,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 20,\n        \"titulo\": \"\\\"postagem teste\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    },\n    {\n        \"id\": 21,\n        \"titulo\": \"\\\"postagem nova\\\"\",\n        \"conteudo\": \"\\\"conteudo conteudo conteudo\\\"\"\n    }\n]"
+				},
+				{
+					"name": "Conteúdo bloqueado para quem não é usuário",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/post/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"post",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "349"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"15d-1XdXyySx5iUlo5nQdTyEl960lgA\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 16 Jun 2021 20:33:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"titulo\": \"titulo da postagem\",\n        \"conteudo\": \"implementa... Você precisa assinar o blog para ler o restante do post\"\n    },\n    {\n        \"titulo\": \"titulo da postagem\",\n        \"conteudo\": \"implementa... Você precisa assinar o blog para ler o restante do post\"\n    },\n    {\n        \"titulo\": \"titulo da postagem\",\n        \"conteudo\": \"implementa... Você precisa assinar o blog para ler o restante do post\"\n    }\n]"
 				}
 			]
 		},
@@ -618,7 +924,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"teste\",\r\n    \"senha\": \"teste123\"\r\n}",
+					"raw": "{\r\n    \"email\": \"senha@teste.com\",\r\n    \"senha\": \"teste1234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1125,6 +1431,198 @@
 					],
 					"cookie": [],
 					"body": null
+				}
+			]
+		},
+		{
+			"name": "Esqueci minha senha",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjIzNjc3OTQ2LCJleHAiOjE2MjM2Nzg4NDZ9.HY3CQfwu-RynKIYTfZoVORrZiByjALtNwKLw56IzGeQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"senha@teste.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/usuario/esqueci-minha-senha",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"esqueci-minha-senha"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Esqueci minha senha",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"senha@teste.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/esqueci-minha-senha",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"esqueci-minha-senha"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "127"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7f-r67erxx620CFWq2FjKQuonNIVeA\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 17 Jun 2021 14:24:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"mensagem\": \"Se encontrarmos um usuário com este email, vamos enviar uma mensagem com as instruções para redefinir a senha\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Trocar senha",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"ecfa96ae9af15e79879a6f8ee9065d81f625c0e175d565fb\",\r\n    \"senha\": \"teste1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/usuario/trocar-senha",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"trocar-senha"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Trocar senha",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"ecfa96ae9af15e79879a6f8ee9065d81f625c0e175d565fb\",\r\n    \"senha\": \"teste1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/trocar-senha",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"trocar-senha"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"33-Ln40kDDh6kd0EgMzkMkZnSvymOM\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 17 Jun 2021 14:24:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"mensagem\": \"Sua senha foi atualizada com sucesso\"\n}"
 				}
 			]
 		}
